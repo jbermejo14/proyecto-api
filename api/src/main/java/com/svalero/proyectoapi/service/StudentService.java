@@ -7,12 +7,14 @@ import com.svalero.proyectoapi.domain.dto.CourseOutDto;
 import com.svalero.proyectoapi.domain.dto.StudentInDto;
 import com.svalero.proyectoapi.domain.dto.StudentOutDto;
 import com.svalero.proyectoapi.exception.StudentNotFoundException;
+import com.svalero.proyectoapi.repository.CourseRepository;
 import com.svalero.proyectoapi.repository.StudentRepository;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -22,6 +24,8 @@ public class StudentService {
     private StudentRepository studentRepository;
     @Autowired
     private ModelMapper modelMapper;
+    @Autowired
+    private CourseRepository courseRepository;
 
     public List<StudentOutDto> getAll(String name, String email) {
         List<Student> studentList;
@@ -54,8 +58,15 @@ public class StudentService {
 
     public StudentOutDto add(StudentInDto studentInDto) {
         Student student = modelMapper.map(studentInDto, Student.class);
-        Student newStudent = studentRepository.save(student);
 
+        if (studentInDto.getCourseIds() != null && !studentInDto.getCourseIds().isEmpty()) {
+            List<Course> courses = courseRepository.findAllById(studentInDto.getCourseIds());
+            student.setCourses(courses);
+        } else {
+            student.setCourses(new ArrayList<>());
+        }
+
+        Student newStudent = studentRepository.save(student);
         return modelMapper.map(newStudent, StudentOutDto.class);
     }
 
