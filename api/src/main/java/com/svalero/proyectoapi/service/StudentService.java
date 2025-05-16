@@ -1,7 +1,9 @@
 package com.svalero.proyectoapi.service;
 
+import com.svalero.proyectoapi.domain.Course;
 import com.svalero.proyectoapi.domain.Student;
 import com.svalero.proyectoapi.domain.dto.CourseInDto;
+import com.svalero.proyectoapi.domain.dto.CourseOutDto;
 import com.svalero.proyectoapi.domain.dto.StudentInDto;
 import com.svalero.proyectoapi.domain.dto.StudentOutDto;
 import com.svalero.proyectoapi.exception.StudentNotFoundException;
@@ -40,6 +42,14 @@ public class StudentService {
 
     public Student get(long id) throws StudentNotFoundException {
         return studentRepository.findById(id).orElseThrow(StudentNotFoundException::new);
+    }
+
+    public List<CourseOutDto> getCoursesByStudentId(long studentId) {
+        Student student = studentRepository.findById(studentId)
+                .orElseThrow(() -> new RuntimeException("Estudiante no encontrado"));
+
+        List<Course> courses = student.getCourses();
+        return modelMapper.map(courses, new TypeToken<List<CourseOutDto>>() {}.getType());
     }
 
     public StudentOutDto add(StudentInDto studentInDto) {
