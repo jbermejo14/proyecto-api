@@ -31,9 +31,11 @@ public class Student {
     @Column
     private Boolean verified;
     @ManyToMany
-    @JoinTable(name = "courses",
+    @JoinTable(
+            name = "course_student",
             joinColumns = @JoinColumn(name = "student_id"),
-            inverseJoinColumns = @JoinColumn(name = "course_id"))
+            inverseJoinColumns = @JoinColumn(name = "course_id")
+    )
     private List<Course> courses;
 }
 

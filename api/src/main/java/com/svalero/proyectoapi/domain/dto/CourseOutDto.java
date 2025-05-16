@@ -11,6 +11,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CourseOutDto {
+    private Long id;
     private String title;
     private String description;
     private Date startDate;

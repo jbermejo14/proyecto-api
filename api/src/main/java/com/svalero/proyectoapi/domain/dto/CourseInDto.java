@@ -13,6 +13,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CourseInDto {
+    private Long id;
     private String title;
     private String description;
     private Date startDate;

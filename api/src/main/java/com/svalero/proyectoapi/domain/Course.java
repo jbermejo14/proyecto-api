@@ -20,9 +20,9 @@ public class Course {
     @Column
     private String title;
     @Column
-    private Date fechaInicio;
-    @Column
     private String description;
+    @Column
+    private Date startDate;
     @Column
     private Boolean active;
     @ManyToMany(mappedBy = "courses")
