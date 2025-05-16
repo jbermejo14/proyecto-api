@@ -84,7 +84,7 @@ public class CourseApiServiceTest {
     @Test
     @MockitoSettings(strictness = Strictness.LENIENT)
     public void testAdd() {
-        CourseInDto courseRegistrationDto = new CourseInDto(31L, "Curso 1", "Descripción 1", Date.valueOf(LocalDate.now()), true, new ArrayList<>());
+        CourseInDto courseRegistrationDto = new CourseInDto("Curso 1", "Descripción 1", Date.valueOf(LocalDate.now()), true, new ArrayList<>());
         Course mockCourse = new Course(31L, "Curso 1", "Descripción 1", Date.valueOf(LocalDate.now()), true, new ArrayList<>());
         CourseOutDto mockCourseOutDto = new CourseOutDto(31L, "Curso 1", "Descripción 1", Date.valueOf(LocalDate.now()), true, new ArrayList<>());
 

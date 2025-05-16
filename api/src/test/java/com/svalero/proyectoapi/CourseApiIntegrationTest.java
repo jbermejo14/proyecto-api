@@ -49,7 +49,7 @@ public class CourseApiIntegrationTest {
 
     @Test
     public void shouldCreateCourse201() throws Exception {
-        CourseInDto dto = new CourseInDto(null, "Nuevo Curso", "Descripción nueva", Date.valueOf(LocalDate.now()), true, new ArrayList<>());
+        CourseInDto dto = new CourseInDto("Nuevo Curso", "Descripción nueva", Date.valueOf(LocalDate.now()), true, new ArrayList<>());
 
         mockMvc.perform(post("/course")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -61,7 +61,7 @@ public class CourseApiIntegrationTest {
     @Test
     public void shouldReturn400WhenInvalidCourse() throws Exception {
         // Por ejemplo, falta el título o está vacío
-        CourseInDto dto = new CourseInDto(null, "", "Sin título", Date.valueOf(LocalDate.now()), true, new ArrayList<>());
+        CourseInDto dto = new CourseInDto("", "Sin título", Date.valueOf(LocalDate.now()), true, new ArrayList<>());
 
         mockMvc.perform(post("/course")
                         .contentType(MediaType.APPLICATION_JSON)
