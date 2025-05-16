@@ -6,6 +6,7 @@
 /Users/jaimebermejo/Documents/proyecto-api/api/src/main/java/com/svalero/proyectoapi/domain/Student.java
 /Users/jaimebermejo/Documents/proyecto-api/api/src/main/java/com/svalero/proyectoapi/domain/dto/CourseInDto.java
 /Users/jaimebermejo/Documents/proyecto-api/api/src/main/java/com/svalero/proyectoapi/domain/dto/CourseOutDto.java
+/Users/jaimebermejo/Documents/proyecto-api/api/src/main/java/com/svalero/proyectoapi/domain/dto/ErrorResponse.java
 /Users/jaimebermejo/Documents/proyecto-api/api/src/main/java/com/svalero/proyectoapi/domain/dto/StudentInDto.java
 /Users/jaimebermejo/Documents/proyecto-api/api/src/main/java/com/svalero/proyectoapi/domain/dto/StudentOutDto.java
 /Users/jaimebermejo/Documents/proyecto-api/api/src/main/java/com/svalero/proyectoapi/exception/CourseNotFoundException.java

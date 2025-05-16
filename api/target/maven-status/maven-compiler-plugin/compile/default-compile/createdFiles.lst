@@ -14,5 +14,6 @@ com/svalero/proyectoapi/controller/CourseController.class
 com/svalero/proyectoapi/domain/dto/StudentOutDto.class
 com/svalero/proyectoapi/service/StudentService.class
 com/svalero/proyectoapi/repository/CourseRepository.class
+com/svalero/proyectoapi/domain/dto/ErrorResponse.class
 com/svalero/proyectoapi/controller/StudentController.class
 com/svalero/proyectoapi/service/CourseService.class

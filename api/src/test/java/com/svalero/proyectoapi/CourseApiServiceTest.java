@@ -56,7 +56,7 @@ public class CourseApiServiceTest {
         when(courseRepository.findAll()).thenReturn(mockCourseList);
         when(modelMapper.map(mockCourseList, new TypeToken<List<CourseOutDto>>() {}.getType())).thenReturn(mockCourseOutDtoList);
 
-        List<CourseOutDto> courseList = courseService.getAll(null, null);
+        List<CourseOutDto> courseList = courseService.getAll("", "");
 
         assertEquals(3, courseList.size());
         assertEquals("Curso 1", courseList.get(0).getTitle());
@@ -99,17 +99,26 @@ public class CourseApiServiceTest {
 
         verify(courseRepository, times(1)).save(mockCourse);
     }
-//
+
 //    @Test
-//    public void testModifyCustomer() throws CustomerNotFoundException {
-//        Customer mockCustomer = new Customer(31, "Pablo", "test@email.com", "111111111", "test", "user", Date.valueOf(LocalDate.now()));
-//        CustomerInDto customerInDto = new CustomerInDto("Juan", "test@email.com", "111111111", "test", "user", Date.valueOf(LocalDate.now()));
-//        when(customerRepository.findById(31L)).thenReturn(Optional.of(mockCustomer));
+//    public void testModifyCourse() throws CourseNotFoundException {
+//        Long courseId = 31L;
 //
-//        CustomerOutDto updatedCustomer = customerService.modify(31L, customerInDto);
-//        assertEquals("Juan", updatedCustomer.getName());
-//        verify(customerRepository, times(1)).save(mockCustomer);
+//        Course mockCourse = new Course(courseId, "Título viejo", "Descripción vieja", Date.valueOf(LocalDate.now()), true, new ArrayList<>());
+//        CourseInDto courseInDto = new CourseInDto(courseId, "Título nuevo", "Descripción nueva", Date.valueOf(LocalDate.now()), true, new ArrayList<>());
+//        CourseOutDto courseOutDto = new CourseOutDto(courseId, "Título nuevo", "Descripción nueva", Date.valueOf(LocalDate.now()), true, new ArrayList<>());
+//
+//        when(courseRepository.findById(courseId)).thenReturn(Optional.of(mockCourse));
+//        when(modelMapper.map(mockCourse, CourseOutDto.class)).thenReturn(courseOutDto);
+//
+//        CourseOutDto updatedCourse = courseService.modify(courseId, courseInDto);
+//
+//        assertEquals("Título nuevo", updatedCourse.getTitle());
+//        assertEquals("Descripción nueva", updatedCourse.getDescription());
+//        verify(courseRepository, times(1)).save(mockCourse);
 //    }
+
+
 
     @Test
     public void testRemoveCourse() throws CourseNotFoundException {
