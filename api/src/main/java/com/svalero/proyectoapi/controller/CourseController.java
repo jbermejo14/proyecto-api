@@ -47,6 +47,12 @@ public class CourseController {
         return new ResponseEntity<>(newCourse, HttpStatus.CREATED);
     }
 
+    @PostMapping("/{courseId}/students/{studentId}")
+    public ResponseEntity<String> enrollStudentInCourse(@PathVariable long courseId, @PathVariable long studentId) throws CourseNotFoundException {
+        courseService.enrollStudent(courseId, studentId);
+        return ResponseEntity.ok("Estudiante inscrito correctamente en el curso.");
+    }
+
     @DeleteMapping("/{courseId}")
     public ResponseEntity<Void> removeCourse(@PathVariable long courseId) throws CourseNotFoundException{
         courseService.remove(courseId);

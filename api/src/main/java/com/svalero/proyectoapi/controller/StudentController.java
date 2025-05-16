@@ -1,6 +1,7 @@
 package com.svalero.proyectoapi.controller;
 
 import com.svalero.proyectoapi.domain.Student;
+import com.svalero.proyectoapi.domain.dto.CourseOutDto;
 import com.svalero.proyectoapi.domain.dto.StudentInDto;
 import com.svalero.proyectoapi.domain.dto.StudentOutDto;
 import com.svalero.proyectoapi.exception.StudentNotFoundException;
@@ -34,6 +35,12 @@ public class StudentController {
     public ResponseEntity<Student> getStudent(@PathVariable long studentId) throws StudentNotFoundException {
         Student student = studentService.get(studentId);
         return new ResponseEntity<>(student, HttpStatus.OK);
+    }
+
+    @GetMapping("/{studentId}/courses")
+    public ResponseEntity<List<CourseOutDto>> getCoursesByStudent(@PathVariable long studentId) {
+        List<CourseOutDto> courses = studentService.getCoursesByStudentId(studentId);
+        return ResponseEntity.ok(courses);
     }
 
     @PostMapping

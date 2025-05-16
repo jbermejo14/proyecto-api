@@ -18,8 +18,8 @@ public class StudentInDto {
         private String email;
         private Date registryDate;
         private Boolean verified;
-        private List<Course> courses;
-    }
+        private List<Long> courseIds;
+}
 
 
 
