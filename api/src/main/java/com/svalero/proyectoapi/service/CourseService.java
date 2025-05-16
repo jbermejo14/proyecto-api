@@ -3,6 +3,7 @@ package com.svalero.proyectoapi.service;
 import com.svalero.proyectoapi.domain.dto.CourseInDto;
 import com.svalero.proyectoapi.exception.CourseNotFoundException;
 import com.svalero.proyectoapi.repository.CourseRepository;
+import com.svalero.proyectoapi.repository.StudentRepository;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,8 @@ public class CourseService {
     private CourseRepository courseRepository;
     @Autowired
     private ModelMapper modelMapper;
+    @Autowired
+    private StudentRepository studentRepository;
 
     public List<CourseOutDto> getAll(String title, String description) {
         List<Course> courseList;
@@ -39,6 +42,19 @@ public class CourseService {
 
     public Course get(long id) throws CourseNotFoundException {
         return courseRepository.findById(id).orElseThrow(CourseNotFoundException::new);
+    }
+
+    public void enrollStudent(long courseId, long studentId) throws CourseNotFoundException {
+        Course course = courseRepository.findById(courseId)
+                .orElseThrow(CourseNotFoundException::new);
+
+        Student student = studentRepository.findById(studentId)
+                .orElseThrow(() -> new RuntimeException("Estudiante no encontrado"));
+
+        if (!course.getStudents().contains(student)) {
+            course.getStudents().add(student);
+            courseRepository.save(course);
+        }
     }
 
     public CourseOutDto add(CourseInDto courseInDto) {
