@@ -8,15 +8,15 @@ module com.svalero.f1wiki {
     requires io.reactivex.rxjava3;
     requires com.google.gson;
 
-    opens com.svalero.f1wiki.response to com.google.gson;
-    opens com.svalero.f1wiki to javafx.fxml, retrofit2.converter.gson, com.google.gson;
+    opens com.svalero.RxJava.response to com.google.gson;
+    opens com.svalero.RxJava to javafx.fxml, retrofit2.converter.gson, com.google.gson;
 
-    exports com.svalero.f1wiki;
-    exports com.svalero.f1wiki.domain;
-    exports com.svalero.f1wiki.table;
-    exports com.svalero.f1wiki.controllers;
-    exports com.svalero.f1wiki.response;
-    opens com.svalero.f1wiki.controllers to javafx.fxml;
-    opens com.svalero.f1wiki.table to com.google.gson, javafx.fxml, retrofit2.fconverter.gson;
-    opens com.svalero.f1wiki.domain to com.google.gson, javafx.fxml, retrofit2.converter.gson;
+    exports com.svalero.RxJava;
+    exports com.svalero.RxJava.domain;
+    exports com.svalero.RxJava.table;
+    exports com.svalero.RxJava.controllers;
+    exports com.svalero.RxJava.response;
+    opens com.svalero.RxJava.controllers to javafx.fxml;
+    opens com.svalero.RxJava.table to com.google.gson, javafx.fxml, retrofit2.fconverter.gson;
+    opens com.svalero.RxJava.domain to com.google.gson, javafx.fxml, retrofit2.converter.gson;
 }

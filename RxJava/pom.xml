@@ -89,7 +89,7 @@
                 <artifactId>javafx-maven-plugin</artifactId>
                 <version>0.0.8</version>
                 <configuration>
-                    <mainClass>com.svalero.f1wiki.RaceResultsApp</mainClass>
+                    <mainClass>com.svalero.RxJava.CourseApi</mainClass>
                 </configuration>
             </plugin>
         </plugins>
