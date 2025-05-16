@@ -1,5 +1,6 @@
 package com.svalero.proyectoapi.service;
 
+import com.svalero.proyectoapi.domain.Student;
 import com.svalero.proyectoapi.domain.dto.CourseInDto;
 import com.svalero.proyectoapi.exception.CourseNotFoundException;
 import com.svalero.proyectoapi.repository.CourseRepository;
