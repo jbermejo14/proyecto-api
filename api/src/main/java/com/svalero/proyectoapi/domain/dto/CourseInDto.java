@@ -2,6 +2,7 @@ package com.svalero.proyectoapi.domain.dto;
 
 import com.svalero.proyectoapi.domain.Student;
 import jakarta.persistence.Column;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -14,7 +15,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CourseInDto {
-    @NotNull(message = "El campo title es obligatorio")
+    @NotBlank(message = "El campo title es obligatorio")
     private String title;
     private String description;
     private Date startDate;

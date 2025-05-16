@@ -80,7 +80,7 @@ public class CourseApiIntegrationTest {
 
     @Test
     public void shouldReturn404WhenDeletingNonexistentCourse() throws Exception {
-        mockMvc.perform(delete("/courses/88888"))
+        mockMvc.perform(delete("/course/88888"))
                 .andExpect(status().isNotFound());
     }
 }
