@@ -100,23 +100,69 @@ public class CourseApiServiceTest {
         verify(courseRepository, times(1)).save(mockCourse);
     }
 
-//    @Test
-//    public void testModifyCourse() throws CourseNotFoundException {
-//        Long courseId = 31L;
-//
-//        Course mockCourse = new Course(courseId, "Título viejo", "Descripción vieja", Date.valueOf(LocalDate.now()), true, new ArrayList<>());
-//        CourseInDto courseInDto = new CourseInDto(courseId, "Título nuevo", "Descripción nueva", Date.valueOf(LocalDate.now()), true, new ArrayList<>());
-//        CourseOutDto courseOutDto = new CourseOutDto(courseId, "Título nuevo", "Descripción nueva", Date.valueOf(LocalDate.now()), true, new ArrayList<>());
-//
-//        when(courseRepository.findById(courseId)).thenReturn(Optional.of(mockCourse));
-//        when(modelMapper.map(mockCourse, CourseOutDto.class)).thenReturn(courseOutDto);
-//
-//        CourseOutDto updatedCourse = courseService.modify(courseId, courseInDto);
-//
-//        assertEquals("Título nuevo", updatedCourse.getTitle());
-//        assertEquals("Descripción nueva", updatedCourse.getDescription());
-//        verify(courseRepository, times(1)).save(mockCourse);
-//    }
+    @Test
+    @MockitoSettings(strictness = Strictness.LENIENT)
+    public void testModifyCourse() throws CourseNotFoundException {
+        long courseId = 31L;
+
+        CourseInDto courseInDto = new CourseInDto(
+                "Curso Modificado",
+                "Descripción Modificada",
+                Date.valueOf(LocalDate.now()),
+                false,
+                new ArrayList<>()
+        );
+
+        Course existingCourse = new Course(
+                courseId,
+                "Curso Original",
+                "Descripción Original",
+                Date.valueOf(LocalDate.now()),
+                true,
+                new ArrayList<>()
+        );
+
+        CourseOutDto expectedOutDto = new CourseOutDto(
+                courseId,
+                "Curso Modificado",
+                "Descripción Modificada",
+                Date.valueOf(LocalDate.now()),
+                false,
+                new ArrayList<>()
+        );
+
+        // Mock repository returning existing course
+        when(courseRepository.findById(courseId)).thenReturn(Optional.of(existingCourse));
+
+        // Mock modelMapper to simulate updating the existingCourse with values from courseInDto
+        doAnswer(invocation -> {
+            CourseInDto dto = invocation.getArgument(0);
+            Course course = invocation.getArgument(1);
+            course.setTitle(dto.getTitle());
+            course.setDescription(dto.getDescription());
+            course.setStartDate(dto.getStartDate());
+            return null;
+        }).when(modelMapper).map(eq(courseInDto), eq(existingCourse));
+
+        // Save returns the same course
+        when(courseRepository.save(existingCourse)).thenReturn(existingCourse);
+
+        // Mapper returns the output DTO
+        when(modelMapper.map(existingCourse, CourseOutDto.class)).thenReturn(expectedOutDto);
+
+        // Call the method
+        CourseOutDto result = courseService.modify(courseId, courseInDto);
+
+        // Assertions
+        assertEquals("Curso Modificado", result.getTitle());
+        assertEquals("Descripción Modificada", result.getDescription());
+
+        // Verify interactions
+        verify(courseRepository, times(1)).findById(courseId);
+        verify(courseRepository, times(1)).save(existingCourse);
+        verify(modelMapper, times(1)).map(courseInDto, existingCourse);
+        verify(modelMapper, times(1)).map(existingCourse, CourseOutDto.class);
+    }
 
 
 
