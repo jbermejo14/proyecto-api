@@ -1,0 +1,11 @@
+com\svalero\RxJava\CourseApi.class
+com\svalero\RxJava\domain\Course.class
+com\svalero\RxJava\controllers\CourseDetailController.class
+com\svalero\RxJava\ErgastApi.class
+com\svalero\RxJava\response\CoursesResponse.class
+com\svalero\RxJava\controllers\SearchCourseController$1.class
+module-info.class
+com\svalero\RxJava\controllers\SearchCourseController.class
+com\svalero\RxJava\MRDataCourse$CourseTable.class
+com\svalero\RxJava\table\CourseTable.class
+com\svalero\RxJava\MRDataCourse.class
