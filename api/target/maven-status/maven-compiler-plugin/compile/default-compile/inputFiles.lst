@@ -1,0 +1,17 @@
+/Users/jaimebermejo/proyecto-api/api/src/main/java/com/svalero/proyectoapi/ProyectoApiApplication.java
+/Users/jaimebermejo/proyecto-api/api/src/main/java/com/svalero/proyectoapi/config/AppConfig.java
+/Users/jaimebermejo/proyecto-api/api/src/main/java/com/svalero/proyectoapi/controller/CourseController.java
+/Users/jaimebermejo/proyecto-api/api/src/main/java/com/svalero/proyectoapi/controller/StudentController.java
+/Users/jaimebermejo/proyecto-api/api/src/main/java/com/svalero/proyectoapi/domain/Course.java
+/Users/jaimebermejo/proyecto-api/api/src/main/java/com/svalero/proyectoapi/domain/Student.java
+/Users/jaimebermejo/proyecto-api/api/src/main/java/com/svalero/proyectoapi/domain/dto/CourseInDto.java
+/Users/jaimebermejo/proyecto-api/api/src/main/java/com/svalero/proyectoapi/domain/dto/CourseOutDto.java
+/Users/jaimebermejo/proyecto-api/api/src/main/java/com/svalero/proyectoapi/domain/dto/ErrorResponse.java
+/Users/jaimebermejo/proyecto-api/api/src/main/java/com/svalero/proyectoapi/domain/dto/StudentInDto.java
+/Users/jaimebermejo/proyecto-api/api/src/main/java/com/svalero/proyectoapi/domain/dto/StudentOutDto.java
+/Users/jaimebermejo/proyecto-api/api/src/main/java/com/svalero/proyectoapi/exception/CourseNotFoundException.java
+/Users/jaimebermejo/proyecto-api/api/src/main/java/com/svalero/proyectoapi/exception/StudentNotFoundException.java
+/Users/jaimebermejo/proyecto-api/api/src/main/java/com/svalero/proyectoapi/repository/CourseRepository.java
+/Users/jaimebermejo/proyecto-api/api/src/main/java/com/svalero/proyectoapi/repository/StudentRepository.java
+/Users/jaimebermejo/proyecto-api/api/src/main/java/com/svalero/proyectoapi/service/CourseService.java
+/Users/jaimebermejo/proyecto-api/api/src/main/java/com/svalero/proyectoapi/service/StudentService.java
