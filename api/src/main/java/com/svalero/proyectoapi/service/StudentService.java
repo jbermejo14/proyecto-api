@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class StudentService {
@@ -56,6 +57,14 @@ public class StudentService {
         return modelMapper.map(courses, new TypeToken<List<CourseOutDto>>() {}.getType());
     }
 
+    public StudentOutDto convertToOutDto(Student student) {
+        StudentOutDto dto = modelMapper.map(student, StudentOutDto.class);
+        List<Long> courseIds = student.getCourses().stream()
+                .map(Course::getId)
+                .collect(Collectors.toList());
+        dto.setCourseIds(courseIds);
+        return dto;
+    }
 
     public Student convertDtoToEntity(StudentInDto dto) {
         Student student = new Student();

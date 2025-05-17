@@ -18,4 +18,5 @@ public class CourseOutDto {
     private Boolean active;
     private List<Student> students;
 
+
 }

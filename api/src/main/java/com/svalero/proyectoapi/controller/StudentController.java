@@ -32,10 +32,12 @@ public class StudentController {
     }
 
     @GetMapping("/{studentId}")
-    public ResponseEntity<StudentInDto> getStudent(@PathVariable long studentId) throws StudentNotFoundException {
+    public ResponseEntity<StudentOutDto> getStudent(@PathVariable long studentId) throws StudentNotFoundException {
         Student student = studentService.get(studentId);
-        return ResponseEntity.ok(StudentInDto.fromEntity(student));
+        StudentOutDto dto = studentService.convertToOutDto(student);
+        return new ResponseEntity<>(dto, HttpStatus.OK);
     }
+
 
     @GetMapping("/{studentId}/courses")
     public ResponseEntity<List<CourseOutDto>> getCoursesByStudent(@PathVariable long studentId) {
