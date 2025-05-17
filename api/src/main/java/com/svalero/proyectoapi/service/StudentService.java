@@ -92,7 +92,7 @@ public class StudentService {
         }
 
         Student newStudent = studentRepository.save(student);
-        return convertToOutDto(newStudent); // ✅ Usa tu método que mapea correctamente courseIds
+        return convertToOutDto(newStudent);
     }
 
 
