@@ -54,10 +54,14 @@ public class CourseService {
 
         if (!course.getStudents().contains(student)) {
             course.getStudents().add(student);
-            courseRepository.save(course);
-        }
-    }
+            student.getCourses().add(course); // <- AÑADIR ESTA LÍNEA
 
+            // Guardar ambos si es necesario
+            courseRepository.save(course);
+            studentRepository.save(student); // <- SUGERIDO
+        }
+
+    }
     public CourseOutDto add(CourseInDto courseInDto) {
         Course course = modelMapper.map(courseInDto, Course.class);
         Course newCourse = courseRepository.save(course);
