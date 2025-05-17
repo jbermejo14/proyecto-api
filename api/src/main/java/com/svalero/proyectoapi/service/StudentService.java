@@ -56,6 +56,22 @@ public class StudentService {
         return modelMapper.map(courses, new TypeToken<List<CourseOutDto>>() {}.getType());
     }
 
+
+    public Student convertDtoToEntity(StudentInDto dto) {
+        Student student = new Student();
+        student.setName(dto.getName());
+        student.setEmail(dto.getEmail());
+        student.setRegistryDate(dto.getRegistryDate());
+        student.setVerified(dto.getVerified());
+
+        if (dto.getCourseIds() != null && !dto.getCourseIds().isEmpty()) {
+            List<Course> courses = courseRepository.findAllById(dto.getCourseIds());
+            student.setCourses(courses);
+        }
+
+        return student;
+    }
+
     public StudentOutDto add(StudentInDto studentInDto) {
         Student student = modelMapper.map(studentInDto, Student.class);
 
@@ -68,6 +84,11 @@ public class StudentService {
 
         Student newStudent = studentRepository.save(student);
         return modelMapper.map(newStudent, StudentOutDto.class);
+    }
+
+    public Student addStudent(StudentInDto dto) {
+        Student student = convertDtoToEntity(dto);
+        return studentRepository.save(student);
     }
 
     public void remove(long id) throws StudentNotFoundException {
