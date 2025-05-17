@@ -32,9 +32,9 @@ public class StudentController {
     }
 
     @GetMapping("/{studentId}")
-    public ResponseEntity<Student> getStudent(@PathVariable long studentId) throws StudentNotFoundException {
+    public ResponseEntity<StudentInDto> getStudent(@PathVariable long studentId) throws StudentNotFoundException {
         Student student = studentService.get(studentId);
-        return new ResponseEntity<>(student, HttpStatus.OK);
+        return ResponseEntity.ok(StudentInDto.fromEntity(student));
     }
 
     @GetMapping("/{studentId}/courses")
