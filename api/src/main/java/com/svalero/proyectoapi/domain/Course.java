@@ -1,5 +1,6 @@
 package com.svalero.proyectoapi.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
@@ -27,6 +28,6 @@ public class Course {
     @Column
     private Boolean active;
     @ManyToMany(mappedBy = "courses")
-    @JsonManagedReference
+    @JsonBackReference
     private List<Student> students;
 }
