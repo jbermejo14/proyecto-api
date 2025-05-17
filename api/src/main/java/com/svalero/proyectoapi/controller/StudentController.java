@@ -76,19 +76,17 @@ public class StudentController {
     @ExceptionHandler(CourseNotFoundException.class)
     public ResponseEntity<ErrorResponse> handleCourseNotFoundException(CourseNotFoundException exception) {
         ErrorResponse error = ErrorResponse.generalError(404, exception.getMessage());
-        logger.error(exception.getMessage(), exception);
         return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<ErrorResponse> MethodArgumentNotValidException(MethodArgumentNotValidException exception) {
+    public ResponseEntity<ErrorResponse> handleMethodArgumentNotValidException(MethodArgumentNotValidException exception) {
         Map<String, String> errors = new HashMap<>();
         exception.getBindingResult().getAllErrors().forEach(error -> {
             String fieldName = ((FieldError) error).getField();
             String message = error.getDefaultMessage();
             errors.put(fieldName, message);
         });
-        logger.error(exception.getMessage(), exception);
 
         return new ResponseEntity<>(ErrorResponse.validationError(errors), HttpStatus.BAD_REQUEST);
     }

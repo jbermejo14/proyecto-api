@@ -69,7 +69,7 @@ public class CourseController {
     @ExceptionHandler(CourseNotFoundException.class)
     public ResponseEntity<ErrorResponse> handleCourseNotFoundException(CourseNotFoundException exception) {
         ErrorResponse error = ErrorResponse.generalError(404, exception.getMessage());
-        logger.error(exception.getMessage(), exception);
+        // logger.error(exception.getMessage(), exception); // Comentado para evitar que imprima en consola
         return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
     }
 
@@ -81,7 +81,7 @@ public class CourseController {
             String message = error.getDefaultMessage();
             errors.put(fieldName, message);
         });
-        logger.error(exception.getMessage(), exception);
+        // logger.error(exception.getMessage(), exception); // Comentado para evitar que imprima en consola
 
         return new ResponseEntity<>(ErrorResponse.validationError(errors), HttpStatus.BAD_REQUEST);
     }
@@ -95,8 +95,10 @@ public class CourseController {
                     .map(e -> e.getField() + ": " + e.getDefaultMessage())
                     .findFirst()
                     .orElse("Datos inválidos");
+            // Aquí tampoco se imprime el error en consola
             return new ResponseEntity<>(errorMessage, HttpStatus.BAD_REQUEST);
         }
     }
+
 
 }
