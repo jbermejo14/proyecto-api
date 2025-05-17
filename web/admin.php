@@ -62,12 +62,40 @@ $cursos = Curso::listarPorCategoria();
                     <form action="controller/cursosController.php" method="POST" style="display:inline;">
                         <input type="hidden" name="accion" value="eliminar">
                         <input type="hidden" name="id" value="<?= $c['id'] ?>">
-                        <input type="submit" value="Delete" onclick="return confirm('Delete this course?');">
+                        <input type="submit" value="Delete">
                     </form>
                     </td>
                 </tr>
             <?php endwhile; ?>
         </table>
     </main>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('form[action="controller/cursosController.php"][method="POST"]').forEach(form => {
+                const accionInput = form.querySelector('input[name="accion"]');
+                if (accionInput && accionInput.value === 'eliminar') {
+                    form.addEventListener('submit', async (e) => {
+                        e.preventDefault();
+
+                        if (!confirm('Delete this course?')) return;
+
+                        const formData = new FormData(form);
+                        const response = await fetch(form.action, {
+                            method: 'POST',
+                            body: formData
+                        });
+
+                        const result = await response.json();
+                        if (result.success) {
+                            form.closest('tr').remove();
+                        } else {
+                            alert('Error deleting the course.');
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+
 
 <?php include 'view/footer.php'; ?>

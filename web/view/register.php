@@ -90,7 +90,7 @@
 
         <?php if (isset($_GET['error']) && $_GET['error'] == 2): ?>
             <div class="error-message">
-                ⚠️ Este correo ya tiene una cuenta activa.
+                ⚠️ This email already has an active account.
             </div>
         <?php endif; ?>
 
