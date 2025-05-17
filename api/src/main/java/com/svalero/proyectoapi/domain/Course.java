@@ -28,6 +28,6 @@ public class Course {
     @Column
     private Boolean active;
     @ManyToMany(mappedBy = "courses")
-    @JsonBackReference
+    @JsonIgnore
     private List<Student> students;
 }
