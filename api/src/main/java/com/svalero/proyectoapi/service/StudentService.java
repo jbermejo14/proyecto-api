@@ -92,8 +92,9 @@ public class StudentService {
         }
 
         Student newStudent = studentRepository.save(student);
-        return modelMapper.map(newStudent, StudentOutDto.class);
+        return convertToOutDto(newStudent); // ✅ Usa tu método que mapea correctamente courseIds
     }
+
 
     public Student addStudent(StudentInDto dto) {
         Student student = convertDtoToEntity(dto);
