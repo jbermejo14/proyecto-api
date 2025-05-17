@@ -1,11 +1,11 @@
 package com.svalero.proyectoapi.domain.dto;
 
 import com.svalero.proyectoapi.domain.Course;
+import com.svalero.proyectoapi.domain.Student;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 import java.util.Date;
 import java.util.List;
 
@@ -19,6 +19,20 @@ public class StudentInDto {
         private Date registryDate;
         private Boolean verified;
         private List<Long> courseIds;
+
+        public static StudentInDto fromEntity(Student student) {
+                List<Long> courseIds = student.getCourses() != null
+                        ? student.getCourses().stream().map(Course::getId).toList()
+                        : null;
+
+                return new StudentInDto(
+                        student.getName(),
+                        student.getEmail(),
+                        student.getRegistryDate(),
+                        student.getVerified(),
+                        courseIds
+                );
+        }
 }
 
 

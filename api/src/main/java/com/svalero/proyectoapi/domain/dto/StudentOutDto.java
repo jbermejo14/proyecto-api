@@ -18,6 +18,7 @@ public class StudentOutDto {
     private Date registryDate;
     private Boolean verified;
     private List<Long> courseIds;
+
 }
 
 
