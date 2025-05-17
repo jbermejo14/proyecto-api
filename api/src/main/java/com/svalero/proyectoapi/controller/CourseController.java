@@ -60,7 +60,8 @@ public class CourseController {
     }
 
     @PutMapping("/{courseId}")
-    public ResponseEntity<CourseOutDto> modifyCourse(@PathVariable @Valid Long courseId, @RequestBody CourseInDto course) throws CourseNotFoundException {
+    public ResponseEntity<CourseOutDto> modifyCourse(@PathVariable Long courseId,
+                                                     @Valid @RequestBody CourseInDto course) throws CourseNotFoundException {
         CourseOutDto modifiedCourse = courseService.modify(courseId, course);
         return new ResponseEntity<>(modifiedCourse, HttpStatus.OK);
     }
@@ -84,4 +85,18 @@ public class CourseController {
 
         return new ResponseEntity<>(ErrorResponse.validationError(errors), HttpStatus.BAD_REQUEST);
     }
+
+    @ControllerAdvice
+    public class GlobalExceptionHandler {
+
+        @ExceptionHandler(MethodArgumentNotValidException.class)
+        public ResponseEntity<String> handleValidationExceptions(MethodArgumentNotValidException ex) {
+            String errorMessage = ex.getBindingResult().getFieldErrors().stream()
+                    .map(e -> e.getField() + ": " + e.getDefaultMessage())
+                    .findFirst()
+                    .orElse("Datos inválidos");
+            return new ResponseEntity<>(errorMessage, HttpStatus.BAD_REQUEST);
+        }
+    }
+
 }

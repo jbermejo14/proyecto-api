@@ -15,8 +15,9 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CourseInDto {
-    @NotBlank(message = "El campo title es obligatorio")
+    @NotBlank(message = "El título es obligatorio")
     private String title;
+    @NotBlank(message = "La descripción es obligatoria")
     private String description;
     private Date startDate;
     @NotNull(message = "El campo active es obligatorio")

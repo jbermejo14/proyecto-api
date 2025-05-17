@@ -31,6 +31,9 @@ public class CourseApiIntegrationTest {
     @Autowired
     private ObjectMapper objectMapper;
 
+    // --------------------- GET ---------------------
+
+    // Test: obtener curso por ID (espera 200 OK)
     @Test
     public void shouldReturnCourseById200() throws Exception {
         Course course = new Course(null, "Curso test", "Descripción", Date.valueOf(LocalDate.now()), true, new ArrayList<>());
@@ -41,12 +44,16 @@ public class CourseApiIntegrationTest {
                 .andExpect(jsonPath("$.title").value("Curso test"));
     }
 
+    // Test: obtener curso inexistente (espera 404 Not Found)
     @Test
     public void shouldReturn404WhenCourseNotFound() throws Exception {
         mockMvc.perform(get("/course/999999"))
                 .andExpect(status().isNotFound());
     }
 
+    // --------------------- POST ---------------------
+
+    // Test: crear curso válido (espera 201 Created)
     @Test
     public void shouldCreateCourse201() throws Exception {
         CourseInDto dto = new CourseInDto("Nuevo Curso", "Descripción nueva", Date.valueOf(LocalDate.now()), true, new ArrayList<>());
@@ -58,9 +65,9 @@ public class CourseApiIntegrationTest {
                 .andExpect(jsonPath("$.title").value("Nuevo Curso"));
     }
 
+    // Test: crear curso inválido (por ejemplo, título vacío) (espera 400 Bad Request)
     @Test
     public void shouldReturn400WhenInvalidCourse() throws Exception {
-        // Por ejemplo, falta el título o está vacío
         CourseInDto dto = new CourseInDto("", "Sin título", Date.valueOf(LocalDate.now()), true, new ArrayList<>());
 
         mockMvc.perform(post("/course")
@@ -69,6 +76,9 @@ public class CourseApiIntegrationTest {
                 .andExpect(status().isBadRequest());
     }
 
+    // --------------------- DELETE ---------------------
+
+    // Test: eliminar curso existente (espera 204 No Content)
     @Test
     public void shouldDeleteCourse200() throws Exception {
         Course course = new Course(null, "Curso eliminar", "Para eliminar", Date.valueOf(LocalDate.now()), true, new ArrayList<>());
@@ -78,9 +88,48 @@ public class CourseApiIntegrationTest {
                 .andExpect(status().isNoContent());
     }
 
+    // Test: eliminar curso inexistente (espera 404 Not Found)
     @Test
     public void shouldReturn404WhenDeletingNonexistentCourse() throws Exception {
         mockMvc.perform(delete("/course/88888"))
                 .andExpect(status().isNotFound());
+    }
+
+    // --------------------- PUT ---------------------
+
+    // Test: actualizar curso existente (espera 200 OK)
+    @Test
+    public void shouldUpdateCourse200() throws Exception {
+        Course course = courseRepository.save(new Course(null, "Curso original", "Desc", Date.valueOf(LocalDate.now()), true, new ArrayList<>()));
+        CourseInDto updatedDto = new CourseInDto("Curso modificado", "Desc mod", Date.valueOf(LocalDate.now()), false, new ArrayList<>());
+
+        mockMvc.perform(put("/course/" + course.getId())
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(updatedDto)))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.title").value("Curso modificado"));
+    }
+
+    // Test: actualizar curso inexistente (espera 404 Not Found)
+    @Test
+    public void shouldReturn404WhenUpdatingNonexistentCourse() throws Exception {
+        CourseInDto dto = new CourseInDto("Curso", "Descripción", Date.valueOf(LocalDate.now()), true, new ArrayList<>());
+
+        mockMvc.perform(put("/course/999999")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(dto)))
+                .andExpect(status().isNotFound());
+    }
+
+    // Test: actualizar curso inválido (por ejemplo, título vacío) (espera 400 Bad Request)
+    @Test
+    public void shouldReturn400WhenUpdatingInvalidCourse() throws Exception {
+        Course course = courseRepository.save(new Course(null, "Curso original", "Desc", Date.valueOf(LocalDate.now()), true, new ArrayList<>()));
+        CourseInDto invalidDto = new CourseInDto("", "Descripción", Date.valueOf(LocalDate.now()), true, new ArrayList<>());
+
+        mockMvc.perform(put("/course/" + course.getId())
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(invalidDto)))
+                .andExpect(status().isBadRequest());
     }
 }
