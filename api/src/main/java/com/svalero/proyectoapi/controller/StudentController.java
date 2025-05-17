@@ -2,8 +2,10 @@ package com.svalero.proyectoapi.controller;
 
 import com.svalero.proyectoapi.domain.Student;
 import com.svalero.proyectoapi.domain.dto.CourseOutDto;
+import com.svalero.proyectoapi.domain.dto.ErrorResponse;
 import com.svalero.proyectoapi.domain.dto.StudentInDto;
 import com.svalero.proyectoapi.domain.dto.StudentOutDto;
+import com.svalero.proyectoapi.exception.CourseNotFoundException;
 import com.svalero.proyectoapi.exception.StudentNotFoundException;
 import com.svalero.proyectoapi.service.StudentService;
 import jakarta.validation.Valid;
@@ -12,9 +14,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/student")
@@ -58,8 +64,41 @@ public class StudentController {
     }
 
     @PutMapping("/{studentId}")
-    public ResponseEntity<StudentOutDto> modifyStudent(@PathVariable @Valid Long studentId, @RequestBody StudentInDto student) throws StudentNotFoundException {
+    public ResponseEntity<StudentOutDto> modifyStudent(
+            @PathVariable Long studentId,
+            @Valid @RequestBody StudentInDto student) throws StudentNotFoundException {
+
         StudentOutDto modifiedStudent = studentService.modify(studentId, student);
         return new ResponseEntity<>(modifiedStudent, HttpStatus.OK);
     }
+
+
+    @ExceptionHandler(CourseNotFoundException.class)
+    public ResponseEntity<ErrorResponse> handleCourseNotFoundException(CourseNotFoundException exception) {
+        ErrorResponse error = ErrorResponse.generalError(404, exception.getMessage());
+        return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<ErrorResponse> handleMethodArgumentNotValidException(MethodArgumentNotValidException exception) {
+        Map<String, String> errors = new HashMap<>();
+        exception.getBindingResult().getAllErrors().forEach(error -> {
+            String fieldName = ((FieldError) error).getField();
+            String message = error.getDefaultMessage();
+            errors.put(fieldName, message);
+        });
+
+        return new ResponseEntity<>(ErrorResponse.validationError(errors), HttpStatus.BAD_REQUEST);
+    }
+
+    @RestControllerAdvice
+    public class GlobalExceptionHandler {
+
+        @ExceptionHandler(StudentNotFoundException.class)
+        public ResponseEntity<String> handleStudentNotFound(StudentNotFoundException ex) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
+        }
+
+    }
+
 }

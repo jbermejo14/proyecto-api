@@ -60,7 +60,8 @@ public class CourseController {
     }
 
     @PutMapping("/{courseId}")
-    public ResponseEntity<CourseOutDto> modifyCourse(@PathVariable @Valid Long courseId, @RequestBody CourseInDto course) throws CourseNotFoundException {
+    public ResponseEntity<CourseOutDto> modifyCourse(@PathVariable Long courseId,
+                                                     @Valid @RequestBody CourseInDto course) throws CourseNotFoundException {
         CourseOutDto modifiedCourse = courseService.modify(courseId, course);
         return new ResponseEntity<>(modifiedCourse, HttpStatus.OK);
     }
@@ -68,7 +69,7 @@ public class CourseController {
     @ExceptionHandler(CourseNotFoundException.class)
     public ResponseEntity<ErrorResponse> handleCourseNotFoundException(CourseNotFoundException exception) {
         ErrorResponse error = ErrorResponse.generalError(404, exception.getMessage());
-        logger.error(exception.getMessage(), exception);
+        // logger.error(exception.getMessage(), exception); // Comentado para evitar que imprima en consola
         return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
     }
 
@@ -80,8 +81,24 @@ public class CourseController {
             String message = error.getDefaultMessage();
             errors.put(fieldName, message);
         });
-        logger.error(exception.getMessage(), exception);
+        // logger.error(exception.getMessage(), exception); // Comentado para evitar que imprima en consola
 
         return new ResponseEntity<>(ErrorResponse.validationError(errors), HttpStatus.BAD_REQUEST);
     }
+
+    @ControllerAdvice
+    public class GlobalExceptionHandler {
+
+        @ExceptionHandler(MethodArgumentNotValidException.class)
+        public ResponseEntity<String> handleValidationExceptions(MethodArgumentNotValidException ex) {
+            String errorMessage = ex.getBindingResult().getFieldErrors().stream()
+                    .map(e -> e.getField() + ": " + e.getDefaultMessage())
+                    .findFirst()
+                    .orElse("Datos inválidos");
+            // Aquí tampoco se imprime el error en consola
+            return new ResponseEntity<>(errorMessage, HttpStatus.BAD_REQUEST);
+        }
+    }
+
+
 }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" version="3.0.2" name="com.svalero.proyectoapi.CourseApiServiceTest" time="3.156" tests="7" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" version="3.0.2" name="com.svalero.proyectoapi.StudentApiServiceTest" time="0.28" tests="7" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="21"/>
     <property name="sun.jnu.encoding" value="UTF-8"/>
@@ -8,8 +8,10 @@
     <property name="sun.arch.data.model" value="64"/>
     <property name="java.vendor.url" value="https://github.com/Homebrew/homebrew-core/issues"/>
     <property name="user.timezone" value="Europe/Madrid"/>
+    <property name="org.jboss.logging.provider" value="slf4j"/>
     <property name="os.name" value="Mac OS X"/>
     <property name="java.vm.specification.version" value="21"/>
+    <property name="APPLICATION_NAME" value="proyecto-api"/>
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="ES"/>
     <property name="sun.boot.library.path" value="/usr/local/Cellar/openjdk/21.0.2/libexec/openjdk.jdk/Contents/Home/lib"/>
@@ -29,6 +31,8 @@
     <property name="line.separator" value="&#10;"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
+    <property name="FILE_LOG_CHARSET" value="UTF-8"/>
+    <property name="java.awt.headless" value="true"/>
     <property name="apple.awt.application.name" value="ForkedBooter"/>
     <property name="surefire.real.class.path" value="/Users/jaimebermejo/proyecto-api/api/target/surefire/surefirebooter-20250517130507861_3.jar"/>
     <property name="junit.platform.listeners.uid.tracking.enabled" value="true"/>
@@ -47,10 +51,13 @@
     <property name="localRepository" value="/Users/jaimebermejo/.m2/repository"/>
     <property name="java.vendor.url.bug" value="https://github.com/Homebrew/homebrew-core/issues"/>
     <property name="java.io.tmpdir" value="/var/folders/m5/474y9rq94f5c5pyn2rx7tnzw0000gn/T/"/>
+    <property name="com.zaxxer.hikari.pool_number" value="1"/>
     <property name="java.version" value="21.0.2"/>
     <property name="user.dir" value="/Users/jaimebermejo/proyecto-api/api"/>
     <property name="os.arch" value="x86_64"/>
     <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+    <property name="PID" value="2238"/>
+    <property name="CONSOLE_LOG_CHARSET" value="UTF-8"/>
     <property name="native.encoding" value="UTF-8"/>
     <property name="java.library.path" value="/Users/jaimebermejo/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:."/>
     <property name="java.vm.info" value="mixed mode, sharing"/>
@@ -60,19 +67,13 @@
     <property name="sun.io.unicode.encoding" value="UnicodeBig"/>
     <property name="socksNonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="java.class.version" value="65.0"/>
+    <property name="LOGGED_APPLICATION_NAME" value="[proyecto-api] "/>
   </properties>
-  <testcase name="testAdd" classname="com.svalero.proyectoapi.CourseApiServiceTest" time="2.96">
-    <system-err><![CDATA[Mockito is currently self-attaching to enable the inline-mock-maker. This will no longer work in future releases of the JDK. Please add Mockito as an agent to your build what is described in Mockito's documentation: https://javadoc.io/doc/org.mockito/mockito-core/latest/org/mockito/Mockito.html#0.3
-WARNING: A Java agent has been loaded dynamically (/Users/jaimebermejo/.m2/repository/net/bytebuddy/byte-buddy-agent/1.15.11/byte-buddy-agent-1.15.11.jar)
-WARNING: If a serviceability tool is in use, please run with -XX:+EnableDynamicAgentLoading to hide this warning
-WARNING: If a serviceability tool is not in use, please run with -Djdk.instrument.traceUsage for more information
-WARNING: Dynamic loading of agents will be disallowed by default in a future release
-]]></system-err>
-  </testcase>
-  <testcase name="testRemoveCourse" classname="com.svalero.proyectoapi.CourseApiServiceTest" time="0.033"/>
-  <testcase name="testGetCourseById" classname="com.svalero.proyectoapi.CourseApiServiceTest" time="0.012"/>
-  <testcase name="testRemoveCourseNotFound" classname="com.svalero.proyectoapi.CourseApiServiceTest" time="0.018"/>
-  <testcase name="testGetCourseByIdNotFound" classname="com.svalero.proyectoapi.CourseApiServiceTest" time="0.01"/>
-  <testcase name="testModifyCourse" classname="com.svalero.proyectoapi.CourseApiServiceTest" time="0.022"/>
-  <testcase name="testGetAll" classname="com.svalero.proyectoapi.CourseApiServiceTest" time="0.017"/>
+  <testcase name="testAdd" classname="com.svalero.proyectoapi.StudentApiServiceTest" time="0.215"/>
+  <testcase name="testGetStudentByIdNotFound" classname="com.svalero.proyectoapi.StudentApiServiceTest" time="0.01"/>
+  <testcase name="testRemoveStudentNotFound" classname="com.svalero.proyectoapi.StudentApiServiceTest" time="0.009"/>
+  <testcase name="testModifyStudent" classname="com.svalero.proyectoapi.StudentApiServiceTest" time="0.012"/>
+  <testcase name="testGetStudentById" classname="com.svalero.proyectoapi.StudentApiServiceTest" time="0.005"/>
+  <testcase name="testRemoveStudent" classname="com.svalero.proyectoapi.StudentApiServiceTest" time="0.007"/>
+  <testcase name="testGetAll" classname="com.svalero.proyectoapi.StudentApiServiceTest" time="0.009"/>
 </testsuite>

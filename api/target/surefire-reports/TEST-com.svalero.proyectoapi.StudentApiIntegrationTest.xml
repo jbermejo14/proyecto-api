@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" version="3.0.2" name="com.svalero.proyectoapi.CourseApiServiceTest" time="3.156" tests="7" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" version="3.0.2" name="com.svalero.proyectoapi.StudentApiIntegrationTest" time="19.975" tests="9" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="21"/>
     <property name="sun.jnu.encoding" value="UTF-8"/>
@@ -8,8 +8,10 @@
     <property name="sun.arch.data.model" value="64"/>
     <property name="java.vendor.url" value="https://github.com/Homebrew/homebrew-core/issues"/>
     <property name="user.timezone" value="Europe/Madrid"/>
+    <property name="org.jboss.logging.provider" value="slf4j"/>
     <property name="os.name" value="Mac OS X"/>
     <property name="java.vm.specification.version" value="21"/>
+    <property name="APPLICATION_NAME" value="proyecto-api"/>
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="ES"/>
     <property name="sun.boot.library.path" value="/usr/local/Cellar/openjdk/21.0.2/libexec/openjdk.jdk/Contents/Home/lib"/>
@@ -29,6 +31,8 @@
     <property name="line.separator" value="&#10;"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
+    <property name="FILE_LOG_CHARSET" value="UTF-8"/>
+    <property name="java.awt.headless" value="true"/>
     <property name="apple.awt.application.name" value="ForkedBooter"/>
     <property name="surefire.real.class.path" value="/Users/jaimebermejo/proyecto-api/api/target/surefire/surefirebooter-20250517130507861_3.jar"/>
     <property name="junit.platform.listeners.uid.tracking.enabled" value="true"/>
@@ -47,10 +51,13 @@
     <property name="localRepository" value="/Users/jaimebermejo/.m2/repository"/>
     <property name="java.vendor.url.bug" value="https://github.com/Homebrew/homebrew-core/issues"/>
     <property name="java.io.tmpdir" value="/var/folders/m5/474y9rq94f5c5pyn2rx7tnzw0000gn/T/"/>
+    <property name="com.zaxxer.hikari.pool_number" value="1"/>
     <property name="java.version" value="21.0.2"/>
     <property name="user.dir" value="/Users/jaimebermejo/proyecto-api/api"/>
     <property name="os.arch" value="x86_64"/>
     <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+    <property name="PID" value="2238"/>
+    <property name="CONSOLE_LOG_CHARSET" value="UTF-8"/>
     <property name="native.encoding" value="UTF-8"/>
     <property name="java.library.path" value="/Users/jaimebermejo/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:."/>
     <property name="java.vm.info" value="mixed mode, sharing"/>
@@ -60,19 +67,58 @@
     <property name="sun.io.unicode.encoding" value="UnicodeBig"/>
     <property name="socksNonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="java.class.version" value="65.0"/>
+    <property name="LOGGED_APPLICATION_NAME" value="[proyecto-api] "/>
   </properties>
-  <testcase name="testAdd" classname="com.svalero.proyectoapi.CourseApiServiceTest" time="2.96">
-    <system-err><![CDATA[Mockito is currently self-attaching to enable the inline-mock-maker. This will no longer work in future releases of the JDK. Please add Mockito as an agent to your build what is described in Mockito's documentation: https://javadoc.io/doc/org.mockito/mockito-core/latest/org/mockito/Mockito.html#0.3
-WARNING: A Java agent has been loaded dynamically (/Users/jaimebermejo/.m2/repository/net/bytebuddy/byte-buddy-agent/1.15.11/byte-buddy-agent-1.15.11.jar)
-WARNING: If a serviceability tool is in use, please run with -XX:+EnableDynamicAgentLoading to hide this warning
-WARNING: If a serviceability tool is not in use, please run with -Djdk.instrument.traceUsage for more information
-WARNING: Dynamic loading of agents will be disallowed by default in a future release
-]]></system-err>
+  <testcase name="shouldDeleteStudent204" classname="com.svalero.proyectoapi.StudentApiIntegrationTest" time="1.87">
+    <system-out><![CDATA[13:05:13.622 [main] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [com.svalero.proyectoapi.StudentApiIntegrationTest]: StudentApiIntegrationTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+13:05:13.963 [main] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.svalero.proyectoapi.ProyectoApiApplication for test class com.svalero.proyectoapi.StudentApiIntegrationTest
+13:05:14.357 [main] INFO org.springframework.boot.devtools.restart.RestartApplicationListener -- Restart disabled due to context in which it is running
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v3.4.5)
+
+2025-05-17T13:05:15.257+02:00  INFO 2238 --- [proyecto-api] [           main] c.s.p.StudentApiIntegrationTest          : Starting StudentApiIntegrationTest using Java 21.0.2 with PID 2238 (started by jaimebermejo in /Users/jaimebermejo/proyecto-api/api)
+2025-05-17T13:05:15.262+02:00  INFO 2238 --- [proyecto-api] [           main] c.s.p.StudentApiIntegrationTest          : No active profile set, falling back to 1 default profile: "default"
+2025-05-17T13:05:17.537+02:00  INFO 2238 --- [proyecto-api] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-05-17T13:05:17.782+02:00  INFO 2238 --- [proyecto-api] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 213 ms. Found 2 JPA repository interfaces.
+2025-05-17T13:05:19.737+02:00  INFO 2238 --- [proyecto-api] [           main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-05-17T13:05:19.995+02:00  INFO 2238 --- [proyecto-api] [           main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.13.Final
+2025-05-17T13:05:20.074+02:00  INFO 2238 --- [proyecto-api] [           main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-05-17T13:05:20.453+02:00  INFO 2238 --- [proyecto-api] [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-05-17T13:05:20.520+02:00  INFO 2238 --- [proyecto-api] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-05-17T13:05:21.612+02:00  INFO 2238 --- [proyecto-api] [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@c335b9
+2025-05-17T13:05:21.617+02:00  INFO 2238 --- [proyecto-api] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-05-17T13:05:21.667+02:00  WARN 2238 --- [proyecto-api] [           main] org.hibernate.orm.deprecation            : HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-05-17T13:05:21.669+02:00  WARN 2238 --- [proyecto-api] [           main] org.hibernate.orm.deprecation            : HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2025-05-17T13:05:21.704+02:00  INFO 2238 --- [proyecto-api] [           main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 8.0
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-05-17T13:05:23.261+02:00  INFO 2238 --- [proyecto-api] [           main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-05-17T13:05:24.528+02:00  INFO 2238 --- [proyecto-api] [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-05-17T13:05:25.432+02:00  WARN 2238 --- [proyecto-api] [           main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-05-17T13:05:26.311+02:00  INFO 2238 --- [proyecto-api] [           main] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2025-05-17T13:05:26.313+02:00  INFO 2238 --- [proyecto-api] [           main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2025-05-17T13:05:26.319+02:00  INFO 2238 --- [proyecto-api] [           main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 3 ms
+2025-05-17T13:05:26.370+02:00  INFO 2238 --- [proyecto-api] [           main] c.s.p.StudentApiIntegrationTest          : Started StudentApiIntegrationTest in 12.043 seconds (process running for 18.233)
+]]></system-out>
   </testcase>
-  <testcase name="testRemoveCourse" classname="com.svalero.proyectoapi.CourseApiServiceTest" time="0.033"/>
-  <testcase name="testGetCourseById" classname="com.svalero.proyectoapi.CourseApiServiceTest" time="0.012"/>
-  <testcase name="testRemoveCourseNotFound" classname="com.svalero.proyectoapi.CourseApiServiceTest" time="0.018"/>
-  <testcase name="testGetCourseByIdNotFound" classname="com.svalero.proyectoapi.CourseApiServiceTest" time="0.01"/>
-  <testcase name="testModifyCourse" classname="com.svalero.proyectoapi.CourseApiServiceTest" time="0.022"/>
-  <testcase name="testGetAll" classname="com.svalero.proyectoapi.CourseApiServiceTest" time="0.017"/>
+  <testcase name="shouldUpdateStudent200" classname="com.svalero.proyectoapi.StudentApiIntegrationTest" time="1.677"/>
+  <testcase name="shouldReturn404WhenStudentNotFound" classname="com.svalero.proyectoapi.StudentApiIntegrationTest" time="0.466"/>
+  <testcase name="shouldReturn400WhenInvalidStudent" classname="com.svalero.proyectoapi.StudentApiIntegrationTest" time="0.034"/>
+  <testcase name="shouldReturn400WhenUpdatingInvalidStudent" classname="com.svalero.proyectoapi.StudentApiIntegrationTest" time="0.433"/>
+  <testcase name="shouldReturn404WhenUpdatingNonexistentStudent" classname="com.svalero.proyectoapi.StudentApiIntegrationTest" time="0.44"/>
+  <testcase name="shouldReturn404WhenDeletingNonexistentStudent" classname="com.svalero.proyectoapi.StudentApiIntegrationTest" time="0.426"/>
+  <testcase name="shouldReturnStudentById200" classname="com.svalero.proyectoapi.StudentApiIntegrationTest" time="0.994"/>
+  <testcase name="shouldCreateStudent201" classname="com.svalero.proyectoapi.StudentApiIntegrationTest" time="0.437"/>
 </testsuite>

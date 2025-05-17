@@ -1,2 +1,4 @@
-/Users/jaimebermejo/Documents/proyecto-api/api/src/test/java/com/svalero/proyectoapi/CourseApiIntegrationTest.java
-/Users/jaimebermejo/Documents/proyecto-api/api/src/test/java/com/svalero/proyectoapi/CourseApiServiceTest.java
+/Users/jaimebermejo/proyecto-api/api/src/test/java/com/svalero/proyectoapi/CourseApiIntegrationTest.java
+/Users/jaimebermejo/proyecto-api/api/src/test/java/com/svalero/proyectoapi/CourseApiServiceTest.java
+/Users/jaimebermejo/proyecto-api/api/src/test/java/com/svalero/proyectoapi/StudentApiIntegrationTest.java
+/Users/jaimebermejo/proyecto-api/api/src/test/java/com/svalero/proyectoapi/StudentApiServiceTest.java

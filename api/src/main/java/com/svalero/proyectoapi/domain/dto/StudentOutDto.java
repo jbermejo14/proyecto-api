@@ -12,7 +12,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class StudentOutDto {
-
+    private Long id;
     private String name;
     private String email;
     private Date registryDate;
