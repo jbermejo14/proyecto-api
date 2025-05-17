@@ -28,6 +28,5 @@ public class Course {
     @Column
     private Boolean active;
     @ManyToMany(mappedBy = "courses")
-    @JsonIgnore
     private List<Student> students;
 }
